@@ -5,8 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "main": "node --env-file=.env src/index.js",
-    "replace": "node --env-file=.env src/replace.js"
+    "main": "node --env-file=.env src/index.js"
   },
   "author": "",
   "license": "ISC",

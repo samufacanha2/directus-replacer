@@ -13,6 +13,7 @@ async function fetchTranslations(text) {
   );
 
   const maxConcurrentRequests = process.env.MAX_CONCURRENT_REQUESTS || 10;
+  const limit = process.env.LIMIT || 500;
   const results = [];
   const erroredCollections = [];
 
@@ -28,7 +29,7 @@ async function fetchTranslations(text) {
         .request(
           readItems(collection.collection, {
             search: text,
-            limit: 100,
+            limit,
           })
         )
         .then((data) => ({
@@ -36,7 +37,7 @@ async function fetchTranslations(text) {
           value: {
             items: data,
             collection: collection.collection,
-            count: data.length === 100 ? "100+" : data.length,
+            count: data.length === limit ? `${limit}+` : data.length,
           },
         }))
         .catch((error) => ({ status: "rejected", reason: error, collection }));
@@ -68,7 +69,11 @@ async function fetchTranslations(text) {
     .reduce(
       (acc, result) =>
         acc +
-        (result ? (result.count === "100+" ? 100 : result.items.length) : 0),
+        (result
+          ? result.count === `${limit}+`
+            ? limit
+            : result.items.length
+          : 0),
       0
     )
     .toLocaleString();

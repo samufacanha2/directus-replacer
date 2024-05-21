@@ -1,10 +1,9 @@
 import { fetchTranslations } from "./utils/fetchTranslations.js";
 import { replaceTranslations } from "./utils/replaceTranslations.js";
 
-const oldText = "n2va6h";
+const oldText = process.env.OLD_TEXT;
+const newText = process.env.NEW_TEXT;
 
 await fetchTranslations(oldText);
 
-const newText = "455hxv";
-
-// const { updatedItems } = await replaceTranslations(oldText, newText);
+await replaceTranslations(oldText, newText);
