@@ -1,0 +1,16 @@
+{
+  "name": "directus-sandbox",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "main": "node --env-file=.env src/index.js",
+    "replace": "node --env-file=.env src/replace.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@directus/sdk": "^16.0.1"
+  }
+}
